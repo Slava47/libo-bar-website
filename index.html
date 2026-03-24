@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#111111">
+  <title>Ли Бо — Чайный Бар</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icons/icon-192.png" sizes="192x192" type="image/png">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="css/style.css">
+    <style>
+    /* Защита от выделения и копирования */
+    body {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      -webkit-touch-callout: none;
+    }
+    
+    /* Запрет контекстного меню */
+    * {
+      -webkit-tap-highlight-color: transparent;
+    }
+    
+    /* Дополнительная защита для изображений */
+    img {
+      pointer-events: none;
+      -webkit-user-drag: none;
+      user-drag: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Header ───────────────────────────────── -->
+  <header class="header">
+    <h1>李白 · 茶吧</h1>
+    <div class="subtitle">Ли Бо — Чайный Бар</div>
+  </header>
+
+  <!-- ── Main Content ─────────────────────────── -->
+  <main>
+
+    <!-- Home Page -->
+    <section id="home" class="page active">
+      <div class="hero">
+        <div class="kanji">李白</div>
+        <p>Добро пожаловать в чайный бар Ли Бо — место, где древние традиции Востока встречаются с современным вкусом.</p>
+      </div>
+      <div class="ink-divider"></div>
+      <div class="feature-cards">
+        <div class="feature-card" data-nav="menu">
+          <h3>Меню</h3>
+          <p>Наши авторские напитки и блюда — холодные и горячие коктейли, алкогольные напитки и кухня в стиле Азии.</p>
+        </div>
+        <div class="feature-card" data-nav="quiz">
+          <h3>Подбор</h3>
+          <p>Ответьте на несколько вопросов, и мы подберём для Вас идеальный напиток.</p>
+        </div>
+        <div class="feature-card" data-nav="info">
+          <h3>О нас</h3>
+          <p>Часы работы, адрес и всё, что нужно знать о нашем баре.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Menu Page -->
+    <section id="menu" class="page">
+      <div id="menu-content">
+        <div class="loading"><div class="spinner"></div>Загрузка меню…</div>
+      </div>
+    </section>
+
+    <!-- Quiz Page -->
+    <section id="quiz" class="page">
+      <div id="quiz-content">
+        <div class="loading"><div class="spinner"></div>Загрузка…</div>
+      </div>
+    </section>
+
+<!-- Info Page -->
+<section id="info" class="page">
+  <div class="info-section">
+    <div class="info-block">
+      <h2>О нас</h2>
+      <p>Ли Бо — уютный чайный бар, вдохновлённый культурой Востока. Мы предлагаем авторские напитки на основе чаёв, а также блюда азиатской кухни в атмосфере спокойствия и гармонии.</p>
+    </div>
+    <div class="info-block">
+      <h2>Время работы</h2>
+      <ul>
+        <li>Понедельник — Воскресенье: 11:00 – 23:00</li>
+      </ul>
+    </div>
+    <div class="info-block">
+      <h2>Контакты</h2>
+      <p>Ждём Вас и рады любым вопросам!</p>
+      <p>+7 (906) 589-89-92</p>
+    </div>
+    
+    <!-- Информация о разработчике -->
+    <div class="info-block developer-info">
+      <h2>О разработке</h2>
+      <p>Сайт разработан <strong>Вячеславом Руденко</strong></p>
+      <p>Посетите сайт разработчика: <a href="https://rudenko.tech" target="_blank" rel="noopener noreferrer" style="color: white; text-decoration: underline;">rudenko.tech</a></p>
+    </div>
+  </div>
+</section>
+  </main>
+
+  <!-- ── Bottom Navigation ─────────────────────── -->
+  <nav class="bottom-nav">
+    <button data-page="home" class="active" aria-label="Главная">
+      <svg viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1h-2z"/></svg>
+
+      Главная
+    </button>
+    <button data-page="menu" aria-label="Меню">
+      <svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="2"/><path d="M9 12h6M9 16h4"/></svg>
+      Меню
+<button data-page="quiz" aria-label="Подбор напитка">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M6 8h10v7a4 4 0 0 1-4 4h-2a4 4 0 0 1-4-4V8z"/>
+    <path d="M16 8h1a3 3 0 0 1 0 6h-1"/>
+    <path d="M9 4v2M12 4v2M15 4v2"/>
+  </svg>
+  Подбор
+</button>
+    <button data-page="info" aria-label="О нас">
+     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="12" cy="12" r="10"/>
+  <line x1="12" y1="16" x2="12" y2="12"/>
+  <line x1="12" y1="8" x2="12.01" y2="8"/>
+</svg>
+      О нас
+    </button>
+  </nav>
+
+  <!-- ── Scripts ───────────────────────────────── -->
+  <script src="js/menu-data.js"></script>
+  <script src="js/quiz-data.js"></script>
+  <script src="js/app.js"></script>
+
+  <script>
+    // Feature card navigation
+    document.querySelectorAll('.feature-card[data-nav]').forEach(function(card) {
+      card.addEventListener('click', function() {
+        var target = card.dataset.nav;
+        var btn = document.querySelector('.bottom-nav button[data-page="' + target + '"]');
+        if (btn) btn.click();
+      });
+    });
+  </script>
+
+</body>
+</html>
