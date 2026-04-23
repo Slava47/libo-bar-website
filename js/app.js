@@ -81,24 +81,62 @@
   /* ── Menu Rendering ────────────────────────── */
   function renderMenu() {
     if (!menuData) return;
+
     const container = document.getElementById('menu-content');
     if (!container) return;
 
     if (!currentCategory) currentCategory = menuData.categories[0].id;
 
-    let html = '<div class="category-tabs">';
+    container.innerHTML = `
+      <div class="category-tabs" id="menu-tabs"></div>
+      <div class="menu-grid" id="menu-grid"></div>
+    `;
+
+    renderMenuTabs();
+    renderMenuItems();
+  }
+
+  function renderMenuTabs() {
+    const tabsContainer = document.getElementById('menu-tabs');
+    if (!tabsContainer || !menuData) return;
+
+    let html = '';
     menuData.categories.forEach(cat => {
       const active = cat.id === currentCategory ? ' active' : '';
-      html += `<button class="category-tab${active}" data-cat="${cat.id}">${cat.nameZh} ${cat.name}</button>`;
+      html += `<button class="category-tab${active}" data-cat="${cat.id}" type="button">${cat.nameZh} ${cat.name}</button>`;
     });
-    html += '</div><div class="menu-grid">';
+
+    tabsContainer.innerHTML = html;
+
+    tabsContainer.querySelectorAll('.category-tab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const nextCategory = btn.dataset.cat;
+        if (!nextCategory || nextCategory === currentCategory) return;
+
+        currentCategory = nextCategory;
+
+        tabsContainer.querySelectorAll('.category-tab').forEach(tab => {
+          tab.classList.toggle('active', tab.dataset.cat === currentCategory);
+        });
+
+        renderMenuItems();
+      });
+    });
+  }
+
+  function renderMenuItems() {
+    const grid = document.getElementById('menu-grid');
+    if (!grid || !menuData) return;
 
     const items = menuData.items.filter(i => i.category === currentCategory);
+
+    let html = '';
     items.forEach(item => {
       const imgSrc = item.image || '';
       const imgTag = imgSrc
         ? `<img class="menu-item-img" src="${encodeURI(imgSrc)}" alt="${escapeHtml(item.name)}" loading="lazy">`
         : `<div class="menu-item-img" aria-hidden="true"></div>`;
+
       html += `
         <div class="menu-item" data-item-id="${escapeAttr(item.id)}" role="button" tabindex="0">
           ${imgTag}
@@ -107,25 +145,18 @@
             <div class="price">${escapeHtml(item.price)} &#8381;</div>
             <div class="desc">${escapeHtml(item.description)}</div>
           </div>
-        </div>`;
-    });
-    html += '</div>';
-    container.innerHTML = html;
-
-    container.querySelectorAll('.category-tab').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const savedScrollY = window.scrollY;
-        currentCategory = btn.dataset.cat;
-        renderMenu();
-        requestAnimationFrame(() => window.scrollTo(0, savedScrollY));
-      });
+        </div>
+      `;
     });
 
-    container.querySelectorAll('.menu-item[data-item-id]').forEach(el => {
+    grid.innerHTML = html;
+
+    grid.querySelectorAll('.menu-item[data-item-id]').forEach(el => {
       el.addEventListener('click', () => {
         const item = findItemById(el.dataset.itemId);
         if (item) showDetail(item);
       });
+
       el.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
@@ -135,7 +166,6 @@
       });
     });
   }
-
   /* ── Detail View ───────────────────────────── */
   function findItemById(id) {
     if (!menuData) return null;
